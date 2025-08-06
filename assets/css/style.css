@@ -14,7 +14,7 @@ body {
   padding: 0;
   color: white;
   overflow: hidden;
-  background-color: lightslategray;
+  background-color: darkslategray;
 }
 
 * {
@@ -77,7 +77,7 @@ body {
 }
 /* Header */
 header {
-  background-color: darkslategray;
+  background-color: rgb(79, 90, 101);
   border-bottom: outset 2px rgba(47, 79, 79, 20%);
 }
 /* Main Content */
@@ -103,7 +103,7 @@ main{
   outline: none;
 }
 #item-container {
-  border: inset 0.4rem rgba(119, 136, 153, 62%);
+  border: inset 2px rgba(119, 136, 153, 62%);
   color: black;
   flex: 1;
   display: flex;
@@ -117,10 +117,10 @@ main{
   overflow-y: auto;
   overflow-x: hidden;
   background-color: white;
-  border: inset 3px white;
+  border: none;
   margin: 0 5px;
   border-radius: 3px;
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.4), inset -1px -1px 3px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2), inset -1px -1px 3px rgba(255, 255, 255, 0.5);
   min-height: 0;
 }
 
