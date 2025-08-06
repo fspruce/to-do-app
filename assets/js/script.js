@@ -6,14 +6,42 @@ let isEditMode = false;
 let originalTaskText = "";
 let taskBeingEdited = null;
 
-function addTask(){
-  let userTask = document.getElementById("user-input");
-  let tasksSection = document.getElementById("tasks-section");
+// LocalStorage functions
+function saveTasksToStorage() {
+  const tasks = [];
+  const taskWrappers = document.querySelectorAll('.item-wrapper');
   
-  // Check if input has value
-  if (!userTask.value.trim()) {
-    return; // Don't add empty tasks
-  }
+  taskWrappers.forEach(function(wrapper) {
+    const taskText = wrapper.querySelector('p').textContent;
+    const isCompleted = wrapper.querySelector('.completed-box input[type="checkbox"]').checked;
+    
+    tasks.push({
+      text: taskText,
+      completed: isCompleted
+    });
+  });
+  
+  localStorage.setItem('todoTasks', JSON.stringify(tasks));
+}
+
+function loadTasksFromStorage() {
+  const savedTasks = localStorage.getItem('todoTasks');
+  if (!savedTasks) return;
+  
+  const tasks = JSON.parse(savedTasks);
+  const tasksSection = document.getElementById("tasks-section");
+  
+  tasks.forEach(function(task) {
+    createTaskElement(task.text, task.completed);
+  });
+  
+  // Update counter after loading
+  updateTaskCounter();
+  checkEdit();
+}
+
+function createTaskElement(taskText, isCompleted = false) {
+  let tasksSection = document.getElementById("tasks-section");
   
   newItem = {
     wrapper: document.createElement("div"),
@@ -33,7 +61,7 @@ function addTask(){
   newItem.wrapper.style.borderBottom = "1px solid rgba(255, 255, 255, 0.2)";
   
   // Style the content (text on left)
-  newItem.content.innerText = userTask.value;
+  newItem.content.innerText = taskText;
   newItem.content.style.flex = "1";
   newItem.content.style.textAlign = "left";
   newItem.content.style.margin = "0";
@@ -42,13 +70,14 @@ function addTask(){
   newItem.completedBox.classList.add("completed-box");
   newItem.completedCheckbox.type = "checkbox";
   newItem.completedCheckbox.classList.add("item-checkbox");
+  newItem.completedCheckbox.checked = isCompleted;
   newItem.completedBox.appendChild(newItem.completedCheckbox);
   
   // Setup the amend checkbox and its container div
   newItem.amendBox.classList.add("ammend-box");
   newItem.amendCheckbox.type = "checkbox";
   newItem.amendCheckbox.classList.add("item-checkbox");
-  newItem.amendCheckbox.style.marginLeft = "30px"; // Increased spacing
+  newItem.amendCheckbox.style.marginLeft = "30px";
   newItem.amendCheckbox.style.marginRight = "10px";
   newItem.amendBox.appendChild(newItem.amendCheckbox);
   
@@ -57,12 +86,27 @@ function addTask(){
   newItem.wrapper.appendChild(newItem.completedBox);
   newItem.wrapper.appendChild(newItem.amendBox);
   tasksSection.appendChild(newItem.wrapper);
+}
+
+function addTask(){
+  let userTask = document.getElementById("user-input");
+  
+  // Check if input has value
+  if (!userTask.value.trim()) {
+    return; // Don't add empty tasks
+  }
+  
+  // Create the task element
+  createTaskElement(userTask.value, false);
   
   // Clear the input field after adding
   userTask.value = "";
   
   // Update counter
   updateTaskCounter();
+  
+  // Save to localStorage
+  saveTasksToStorage();
 }
 function removeTask(){
   let checkedTasks = document.querySelectorAll('.ammend-box input[type="checkbox"]:checked');
@@ -71,6 +115,9 @@ function removeTask(){
   }
   checkEdit();
   updateTaskCounter();
+  
+  // Save to localStorage
+  saveTasksToStorage();
 }
 function editTask() {
   const checkedTasks = document.querySelectorAll('.ammend-box input[type="checkbox"]:checked');
@@ -110,6 +157,9 @@ function saveEdit() {
 
   // Exit edit mode
   exitEditMode();
+  
+  // Save to localStorage
+  saveTasksToStorage();
 }
 
 function cancelEdit() {
@@ -223,6 +273,9 @@ function toggleAllCompletedCheckboxes() {
   
   // Update counter after changing checkboxes
   updateTaskCounter();
+  
+  // Save to localStorage
+  saveTasksToStorage();
 }
 
 function checkMasterDoneCheckbox() {
@@ -264,6 +317,8 @@ document.addEventListener('change', function(e) {
     updateTaskCounter();
     // Check if master done checkbox should be auto-checked
     checkMasterDoneCheckbox();
+    // Save to localStorage when completion status changes
+    saveTasksToStorage();
   }
 });
 
@@ -283,6 +338,9 @@ document.addEventListener('keydown', function(e) {
 
 // Initialize edit button as disabled when page loads
 document.addEventListener('DOMContentLoaded', function() {
+  // Load saved tasks from localStorage
+  loadTasksFromStorage();
+  
   checkEdit(); // This will disable the button since no tasks exist initially
   updateTaskCounter(); // Initialize counter
 });
