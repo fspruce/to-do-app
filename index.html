@@ -33,6 +33,17 @@
         <button class="col-3 m-2 btn cstm-btn-add" onclick="addTask()">Add</button>
       </div>
       <div id="item-container">
+        <div class="task-banner">
+          <h5 class="task-heading">Task</h5>
+          <h5 class="completed-heading">Done <input type="checkbox" id="master-done-checkbox" class="master-done-checkbox" onchange="toggleAllCompletedCheckboxes()"></h5>
+          <h5 class="amend-heading">Edit <input type="checkbox" id="master-edit-checkbox" class="master-edit-checkbox" onchange="toggleAllAmendCheckboxes()"></h5>
+        </div>
+        <div id="tasks-section">
+          <!-- Tasks will be added here -->
+        </div>
+        <div class="task-banner-bottom">
+          <span id="task-counter">Total items: 0. Completed items: 0/0</span>
+        </div>
       </div>
     </main>
  
