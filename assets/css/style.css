@@ -38,6 +38,19 @@ body {
   color: white;
   transform: translateY(1px);
 }
+.cstm-btn-add:disabled {
+  background-color: rgba(128, 128, 128, 30%) !important;
+  color: rgba(255, 255, 255, 40%) !important;
+  border: outset 3px rgba(128, 128, 128, 30%) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  opacity: 0.5;
+}
+.cstm-btn-add:disabled:hover {
+  background-color: rgba(128, 128, 128, 30%) !important;
+  color: rgba(255, 255, 255, 40%) !important;
+  transform: none !important;
+}
 /* Remove */
 .cstm-btn-remove {
   border: outset 3px lightpink;

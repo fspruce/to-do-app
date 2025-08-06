@@ -41,6 +41,29 @@ function addTask(){
   userTask.value = "";
 }
 function removeTask(){
+  let checkedTasks = document.querySelectorAll('input[type="checkbox"]:checked');
+  for (let i = checkedTasks.length - 1; i >= 0; i--) {
+    checkedTasks[i].parentElement.remove();
+  }
+  checkEdit();
 }
+function checkEdit() {
+  const checkedTasks = document.querySelectorAll('input[type="checkbox"]:checked');
+  const editButton = document.getElementById("edit-button");
+  editButton.disabled = checkedTasks.length !== 1;
+}
+
+// Listen for changes on all checkboxes in the document
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.matches('input[type="checkbox"].item-checkbox')) {
+    checkEdit();
+  }
+});
+
+// Initialize edit button as disabled when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  checkEdit(); // This will disable the button since no tasks exist initially
+});
+
 
 let itemContainer = document.getElementById("items-container");
