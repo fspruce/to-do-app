@@ -19,10 +19,20 @@
     <!-- Navigation Bar -->
     <nav></nav>
     <!-- Header -->
-    <header></header>
+    <header>
+      <h1> To Do</h1>
+    </header>
 
     <!-- Main Content -->
-    <main></main>
+    <main class="container">
+      <div id="user-container" class="row text-center justify-content-center">
+        <label for="user-input" class="lead">What do you need to get done today?</label>
+        <input id="user-input" type="text" name="item">
+        <button class="col-3 m-2 btn btn-outline-danger" onclick="removeTask()">Remove</button>
+        <button class="col-3 m-2 btn btn-outline-success" onclick="addTask()">Add</button>
+      </div>
+      <div id="item-container"></div>
+    </main>
  
     <!-- Footer -->
     <footer></footer>
