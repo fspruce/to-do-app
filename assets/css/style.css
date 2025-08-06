@@ -38,6 +38,7 @@ body {
   color: white;
   transform: translateY(1px);
 }
+/* Remove */
 .cstm-btn-remove {
   border: outset 3px lightpink;
   background-color: rgba(255, 182, 193, 20%);
@@ -58,19 +59,6 @@ body {
   color: lightpink;
   transform: translateY(1px);
 }
-/* Remove */
-
-/* Variables */
-:root {
-  --primary-font:"";
-  --secondary-font:"";
-  --primary-color: #;
-  --secondary-color: #;
-  --highlight-color: #;
-  --highlight-color-light: #;
-  --background-color: #;
-}
-
 /* Header */
 header {
   background-color: darkslategray;
@@ -97,6 +85,7 @@ main{
 }
 #item-container {
   border: inset 0.4rem rgba(119, 136, 153, 62%);
+  color: black;
   flex: 1;
 }
 
