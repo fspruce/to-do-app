@@ -1,3 +1,11 @@
+// Global variable to store the saved state of completed checkboxes
+let savedCompletedState = new Map();
+
+// Global variables for edit mode
+let isEditMode = false;
+let originalTaskText = "";
+let taskBeingEdited = null;
+
 function addTask(){
   let userTask = document.getElementById("user-input");
   let tasksSection = document.getElementById("tasks-section");
@@ -64,12 +72,110 @@ function removeTask(){
   checkEdit();
   updateTaskCounter();
 }
-/*
 function editTask() {
-  let checked = document.querySelectorAll('input[type="checkbox"]:checked')[0];
-  let task = checked.previousSibling;
+  const checkedTasks = document.querySelectorAll('.ammend-box input[type="checkbox"]:checked');
+  if (checkedTasks.length !== 1) return;
+
+  // Enter edit mode
+  isEditMode = true;
+  taskBeingEdited = checkedTasks[0].parentElement.parentElement;
+  const taskTextElement = taskBeingEdited.querySelector('p');
+  originalTaskText = taskTextElement.textContent;
+
+  // Put original text in input field
+  const userInput = document.getElementById("user-input");
+  userInput.value = originalTaskText;
+
+  // Update button states
+  updateButtonsForEditMode(true);
+  
+  // Disable interaction with other elements
+  disableMainScreen(true);
 }
-*/
+
+function saveEdit() {
+  if (!isEditMode || !taskBeingEdited) return;
+
+  const userInput = document.getElementById("user-input");
+  const newText = userInput.value.trim();
+  
+  if (newText === "") {
+    // Don't save empty tasks
+    return;
+  }
+
+  // Update the task text
+  const taskTextElement = taskBeingEdited.querySelector('p');
+  taskTextElement.textContent = newText;
+
+  // Exit edit mode
+  exitEditMode();
+}
+
+function cancelEdit() {
+  if (!isEditMode) return;
+  
+  // Exit edit mode without saving
+  exitEditMode();
+}
+
+function exitEditMode() {
+  isEditMode = false;
+  taskBeingEdited = null;
+  originalTaskText = "";
+
+  // Clear input field
+  const userInput = document.getElementById("user-input");
+  userInput.value = "";
+
+  // Restore button states
+  updateButtonsForEditMode(false);
+  
+  // Re-enable interaction with main screen
+  disableMainScreen(false);
+  
+  // Update edit button state
+  checkEdit();
+}
+
+function updateButtonsForEditMode(enterEditMode) {
+  const editButton = document.getElementById("edit-button");
+  const removeButton = document.getElementById("remove-button");
+  const addButton = document.getElementById("add-button");
+
+  if (enterEditMode) {
+    // Enter edit mode
+    editButton.disabled = true;
+    removeButton.textContent = "Cancel";
+    removeButton.onclick = cancelEdit;
+    addButton.textContent = "Save";
+    addButton.onclick = saveEdit;
+  } else {
+    // Exit edit mode
+    editButton.disabled = false;
+    removeButton.textContent = "Remove";
+    removeButton.onclick = removeTask;
+    addButton.textContent = "Add";
+    addButton.onclick = addTask;
+  }
+}
+
+function disableMainScreen(disable) {
+  const tasksSection = document.getElementById("tasks-section");
+  const masterCheckboxes = document.querySelectorAll('.master-done-checkbox, .master-edit-checkbox');
+  
+  if (disable) {
+    // Disable interaction
+    tasksSection.style.pointerEvents = "none";
+    tasksSection.style.opacity = "0.6";
+    masterCheckboxes.forEach(checkbox => checkbox.disabled = true);
+  } else {
+    // Re-enable interaction
+    tasksSection.style.pointerEvents = "auto";
+    tasksSection.style.opacity = "1";
+    masterCheckboxes.forEach(checkbox => checkbox.disabled = false);
+  }
+}
 function checkEdit() {
   const checkedTasks = document.querySelectorAll('.ammend-box input[type="checkbox"]:checked');
   const editButton = document.getElementById("edit-button");
@@ -94,9 +200,6 @@ function toggleAllAmendCheckboxes() {
   // Update edit button state after changing checkboxes
   checkEdit();
 }
-
-// Global variable to store the saved state of completed checkboxes
-let savedCompletedState = new Map();
 
 function toggleAllCompletedCheckboxes() {
   const masterCheckbox = document.getElementById("master-done-checkbox");
@@ -161,6 +264,20 @@ document.addEventListener('change', function(e) {
     updateTaskCounter();
     // Check if master done checkbox should be auto-checked
     checkMasterDoneCheckbox();
+  }
+});
+
+// Listen for Enter key press in the input field
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const userInput = document.getElementById("user-input");
+    if (document.activeElement === userInput) {
+      if (isEditMode) {
+        saveEdit();
+      } else {
+        addTask();
+      }
+    }
   }
 });
 
