@@ -5,6 +5,41 @@
 @import url('');
 
 /* Global Styles */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Custom Buttons */
+/* Add */
+.cstm-btn-add {
+  border-color: white;
+  color:white;
+}
+.cstm-btn-add:hover{
+  background-color: white;
+  color: lightslategray;
+}
+.cstm-btn-add {
+  border-color: lightpink;
+  color:lightpink;
+}
+.cstm-btn-add:hover{
+  background-color: lightpink;
+  color: lightslategray;
+}
+/* Remove */
+
 /* Variables */
 :root {
   --primary-font:"";
@@ -16,10 +51,33 @@
   --background-color: #;
 }
 
-/* Navigation */
-
 /* Header */
-
+header {
+  background-color: darkslategray;
+  flex-shrink: 0;
+}
+header > hr {
+  box-shadow: 0 2px 3px black;
+  margin-bottom: 0;
+}
 /* Main Content */
+main{
+  border: 2px solid red;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#user-container {
+  margin-top: 0;
+  background-color: lightslategray;
+  flex-shrink: 0;
+}
+#user-container input{
+  max-width: 80%;
+}
+#item-container {
+  border: 2px solid black;
+  flex: 1;
+}
 
 /* Footer */
