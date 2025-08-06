@@ -14,6 +14,7 @@ body {
   padding: 0;
   color: white;
   overflow: hidden;
+  background-color: lightslategray;
 }
 
 * {
@@ -115,8 +116,8 @@ main{
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: rgba(47, 79, 79, 0.1);
-  border: inset 3px rgba(47, 79, 79, 0.6);
+  background-color: white;
+  border: inset 3px white;
   margin: 0 5px;
   border-radius: 3px;
   box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.4), inset -1px -1px 3px rgba(255, 255, 255, 0.1);
@@ -129,7 +130,7 @@ main{
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: rgba(119, 136, 153, 0.8);
+  background-color: rgba(176, 196, 222, 0.85);
   border: inset 2px rgba(119, 136, 153, 50%);
   margin-bottom: 5px;
   color: white;
@@ -143,7 +144,7 @@ main{
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: rgba(119, 136, 153, 0.8);
+  background-color: rgba(176, 196, 222, 0.85);
   border: inset 2px rgba(119, 136, 153, 50%);
   margin-top: 5px;
   color: white;
@@ -295,3 +296,114 @@ main{
 }
 
 /* Footer */
+
+/* Responsive Design - Larger Screens */
+@media screen and (min-width: 768px) {
+  /* Increase font sizes */
+  body {
+    font-size: 18px;
+  }
+  
+  .task-banner h5 {
+    font-size: 16px;
+  }
+  
+  .item-wrapper {
+    font-size: 16px;
+  }
+  
+  #user-container input {
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  #user-container .btn {
+    font-size: 16px;
+  }
+  
+  #user-container label {
+    font-size: 1.3rem;
+  }
+  
+  /* Add margins to narrow the middle section and align header */
+  main, header {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  /* Larger font sizes for desktop */
+  body {
+    font-size: 20px;
+  }
+  
+  .task-banner h5 {
+    font-size: 18px;
+  }
+  
+  .item-wrapper {
+    font-size: 18px;
+  }
+  
+  #user-container input {
+    font-size: 18px;
+    padding: 12px;
+  }
+  
+  #user-container .btn {
+    font-size: 18px;
+  }
+  
+  #user-container label {
+    font-size: 1.5rem;
+  }
+  
+  header h1 {
+    font-size: 3rem;
+  }
+  
+  /* Wider margins for desktop - align header and main */
+  main, header {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  /* Even larger fonts for large screens */
+  body {
+    font-size: 22px;
+  }
+  
+  .task-banner h5 {
+    font-size: 20px;
+  }
+  
+  .item-wrapper {
+    font-size: 20px;
+  }
+  
+  #user-container input {
+    font-size: 20px;
+    padding: 14px;
+  }
+  
+  #user-container .btn {
+    font-size: 20px;
+  }
+  
+  #user-container label {
+    font-size: 1.75rem;
+  }
+  
+  header h1 {
+    font-size: 4rem;
+  }
+  
+  /* Maximum margins for very large screens - align header and main */
+  main, header {
+    margin-left: 200px;
+    margin-right: 200px;
+  }
+}

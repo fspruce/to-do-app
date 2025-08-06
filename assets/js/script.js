@@ -236,7 +236,7 @@ function updateTaskCounter() {
   const totalTasks = document.querySelectorAll('.item-wrapper').length;
   const completedTasks = document.querySelectorAll('.completed-box input[type="checkbox"]:checked').length;
   const counterElement = document.getElementById("task-counter");
-  counterElement.textContent = `Total items: ${totalTasks}. Completed items: ${completedTasks}/${totalTasks}`;
+  counterElement.textContent = `Completed items: ${completedTasks}/${totalTasks}.`;
 }
 
 function toggleAllAmendCheckboxes() {
