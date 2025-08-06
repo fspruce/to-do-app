@@ -23,22 +23,40 @@ body {
 /* Custom Buttons */
 /* Add */
 .cstm-btn-add {
-  border-color: white;
+  border: outset 3px rgba(255, 255, 255, 50%);
   background-color: rgba(255, 255, 255, 20%);
-  color:white;
+  color: white;
+  transition: all 0.1s ease-in-out;
 }
 .cstm-btn-add:hover{
-  background-color: rgba(255, 255, 255, 70%);
-  color: lightslategray;
+  background-color: rgba(255, 255, 255, 35%);
+  transform: translateY(-1px);
+}
+.cstm-btn-add:active{
+  border: inset 3px rgba(255, 255, 255, 50%);
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: white;
+  transform: translateY(1px);
 }
 .cstm-btn-remove {
-  border-color: lightpink;
+  border: outset 3px lightpink;
   background-color: rgba(255, 182, 193, 20%);
-  color:lightpink;
+  color: lightpink;
+  transition: all 0.1s ease-in-out;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cstm-btn-remove:hover{
-  background-color: rgba(255, 182, 193, 70%);
-  color: lightslategray;
+  background-color: rgba(255, 182, 193, 35%);
+  transform: translateY(-1px);
+}
+.cstm-btn-remove:active{
+  border: inset 3px lightpink;
+  background-color: rgba(255, 182, 193, 0.8) !important;
+  color: lightpink;
+  transform: translateY(1px);
 }
 /* Remove */
 
@@ -72,9 +90,13 @@ main{
 }
 #user-container input{
   max-width: 80%;
+  border: inset 2px rgba(47, 79, 79, 60%)
+}
+#user-container input:focus {
+  outline: none;
 }
 #item-container {
-  border: inset 0.4rem rgba(47, 79, 79, 50%);
+  border: inset 0.4rem rgba(119, 136, 153, 62%);
   flex: 1;
 }
 
